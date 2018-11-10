@@ -107,4 +107,4 @@ venv.bak/
 .idea
 
 # Not to add infos on database
-Database/database.ini
+/Database/database.ini
