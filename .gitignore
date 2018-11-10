@@ -105,6 +105,3 @@ venv.bak/
 
 # Pycharm
 .idea
-
-# Not to add infos on database
-/Database/database.ini
