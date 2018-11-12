@@ -3,7 +3,6 @@ import psycopg2
 from getFantasyPointsByPlayer import get_fantasy_points_by_player
 from nba_py import player
 from nba_py.constants import League, CURRENT_SEASON
-from pprint import pprint
 from time import sleep
 
 
