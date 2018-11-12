@@ -4,17 +4,20 @@ from nba_py.constants import CURRENT_SEASON, League
 
 
 def get_fantasy_points_by_player(player_first_name, player_last_name):
-    print("Loading ...")
     player_stats = None
+
+    print("Loading: Getting Fantasy Point for " + player_first_name + " " + player_last_name)
 
     try:
         player_id = player.get_player(player_first_name, player_last_name, CURRENT_SEASON, 0, True)
         player_stats = player.PlayerYearOverYearSplits(player_id, 0, "Base", "PerGame", "N", "N", "N", League.Default,
-                                                       CURRENT_SEASON, 'Regular Season', "0", "", "", "0", "", '', '', '0',
-                                                       '', '', '', '0', '', '0').overall()[0]
+                                                       CURRENT_SEASON, 'Regular Season', "0", "", "", "0", "", '', '',
+                                                       '0', '', '', '', '0', '', '0').overall()[0]
     except StopIteration:
         print("Player not found")
-        exit()
+    except IndexError:
+        print (0)
+        return 0
 
     fgm = player_stats["FGM"]
     fgmi = -0.5 * (player_stats["FGA"] - player_stats["FGM"])
@@ -29,6 +32,7 @@ def get_fantasy_points_by_player(player_first_name, player_last_name):
     pts = player_stats["PTS"]
 
     fantasy_points = round(fgm + fgmi + ftm + ftmi + fg3m + reb + ast + stl + blk + to + pts, 1)
+
     print(fantasy_points)
 
     return fantasy_points
@@ -38,3 +42,4 @@ if __name__ == '__main__':
     PlayerFirstName = sys.argv[1]
     PlayerLastName = sys.argv[2]
     get_fantasy_points_by_player(PlayerFirstName, PlayerLastName)
+    # get_fantasy_points_by_player("Justin", "Anderson")
